@@ -30,6 +30,6 @@ jobs:
           password: ${{ secrets.GITHUB_TOKEN }}
       - name: helm publish
         run: |
-          helm push origin-ca-issuer-*.tgz oci://ghcr.io/cloudflare/origin-ca-issuer-charts |& tee helm-push-output.log
+          helm push origin-ca-issuer-*.tgz oci://ghcr.io/${{ github.repository_owner }}/origin-ca-issuer-charts |& tee helm-push-output.log
           digest=$(awk -F "[, ]+" '/Digest/{print $NF}' < helm-push-output.log)
-          cosign sign --yes "ghcr.io/cloudflare/origin-ca-issuer-charts/origin-ca-issuer@${digest}"
+          cosign sign --yes "ghcr.io/${{ github.repository_owner }}/origin-ca-issuer-charts/origin-ca-issuer@${digest}"

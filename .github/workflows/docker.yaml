@@ -1,12 +1,12 @@
 name: Docker
 on:
-  - pull_request
-  - push
+  workflow_dispatch:
 concurrency:
   group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
   cancel-in-progress: true
 jobs:
   docker:
+    if: false
     runs-on: ubuntu-latest
     permissions:
       contents: read
